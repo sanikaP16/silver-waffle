@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Form</title>
+   <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- I want 4 buttons here, to view history, homePage(add a task), delete a task, think for changing the status. -->
+    <main>
+      <div class="form-container">
+        <h2>Task Entry</h2>
+        <form action="/addTask" method="post">
+          <label for="task">Enter a task:</label>
+          <input type="text" id="task" name="task" required>
+          
+          <label for="status">Enter a status:</label>
+          <select id="status" name="status">
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+          
+          <button type="submit">Submit</button>
+        </form>
+      </main>
+  </div>
+  </body>
+</html>
