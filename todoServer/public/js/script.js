@@ -5,7 +5,7 @@ const getSectionIds = (status) =>
     Completed: "completed-tasks",
   }[status]);
 
-const appendTaskToSection = (task, status) => {
+const appendTaskToSection = ({ task, status }) => {
   const section = document.getElementById(getSectionIds(status));
   const ul = section.querySelector("ul");
   const li = document.createElement("li");
@@ -23,7 +23,7 @@ const appendTask = async () => {
 
     document.querySelectorAll(".list").forEach((ul) => (ul.innerHTML = ""));
 
-    tasks.forEach(({ task, status }) => appendTaskToSection(task, status));
+    tasks.forEach((task) => appendTaskToSection(task));
   } catch (err) {
     alert(err.message);
   }
