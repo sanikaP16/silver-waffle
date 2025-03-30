@@ -10,26 +10,26 @@
   <body>
     <aside>
       <nav class="nav-bar">
-        <h1 id="heading"><a href="">Task Manager</a></h1>
+        <h1 id="heading">Task Manager</h1>
         <ul>
-          <li class=""><a href="#">Home</a></li>
+          <li class=""><a href="/index.html">Home</a></li>
           <li class=""><a href="#">All Tasks</a></li>
         </ul>
       </nav>
     </aside>
 
     <main>
-      <h1>Add Task here! and see your Tasks</h1>
+      <h1>Add Task here!</h1>
       <div class="form-container">
         <form method="post" id="form">
           <div>
-            <label for="task">Enter a task </label>
+            <label for="task">Enter task description </label>
             <input
               type="text"
               id="task"
               name="task"
               required
-              placeholder="Enter a task"
+              placeholder="Task description"
             />
           </div>
           <div>
@@ -44,16 +44,20 @@
           <button type="submit" class="submit-btn">Submit</button>
         </form>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <!--/-->
-        </tbody>
+      <div class="task-sections">
+        <div class="task-column" id="pending-tasks">
+          <h2>Pending</h2>
+          <ul class="list"></ul>
+        </div>
+        <div class="task-column" id="inprogress-tasks">
+          <h2>In Progress</h2>
+          <ul class="list"></ul>
+        </div>
+        <div class="task-column" id="completed-tasks">
+          <h2>Completed</h2>
+          <ul class="list"></ul>
+        </div>
+      </div>
     </main>
   </body>
 </html>

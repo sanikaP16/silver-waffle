@@ -1,37 +1,50 @@
-const appendTd = (tr, data) => {
-  const td = document.createElement("td");
-  td.textContent = data;
-  tr.appendChild(td);
-};
+const getSectionIds = (status) =>
+  ({
+    Pending: "pending-tasks",
+    "In-progress": "inprogress-tasks",
+    Completed: "completed-tasks",
+  }[status]);
 
-const appendRow = ({ task, status }) => {
-  const tr = document.createElement("tr");
-  appendTd(tr, task);
-  appendTd(tr, status);
-
-  return tr;
+const appendTaskToSection = (task, status) => {
+  const section = document.getElementById(getSectionIds(status));
+  const ul = section.querySelector("ul");
+  const li = document.createElement("li");
+  li.textContent = task;
+  li.classList = "list-items";
+  ul.appendChild(li);
 };
 
 const appendTask = async () => {
-  const response = await fetch("/getTask");
-  const tasks = await response.json();
-  const tbody = document.getElementById("tbody");
-  tbody.textContent = "";
+  try {
+    const response = await fetch("/getTask");
+    if (response.status === 400) throw new Error("Failed to fetch tasks");
 
-  tasks.forEach((task) => tbody.appendChild(appendRow(task)));
+    const tasks = await response.json();
+
+    document.querySelectorAll(".list").forEach((ul) => (ul.innerHTML = ""));
+
+    tasks.forEach(({ task, status }) => appendTaskToSection(task, status));
+  } catch (err) {
+    alert(err.message);
+  }
 };
 
 const handleSubmit = async (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
+  try {
+    const response = await fetch("/postTask", {
+      method: "POST",
+      body: formData,
+    });
 
-  await fetch("/postTask", {
-    method: "POST",
-    body: formData,
-  });
+    if (response.status === 400) throw new Error("Failed to add tasks");
 
-  appendTask();
-  event.target.reset();
+    appendTask();
+    event.target.reset();
+  } catch (error) {
+    alert(error.message);
+  }
 };
 
 const main = () => {
