@@ -1,10 +1,10 @@
-import { getComment, postComment } from "./handlers/dynamicPages.js";
+import { getTask, postTask } from "./handlers/dynamicPages.js";
 import { serveStatic } from "./handlers/staticPages.js";
 
 const handleRoutes = (req) => {
-  const GET = { "/getComment": getComment };
+  const GET = { "/getTask": getTask };
 
-  const POST = { "/postComment": postComment };
+  const POST = { "/postTask": postTask };
 
   const routes = { GET, POST };
 
